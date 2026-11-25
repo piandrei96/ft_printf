@@ -31,28 +31,59 @@ void	format_diu(t_data *data, char type, va_list args)
 	if (data->flags.precision == 1 && data->flags.p_size == 0
 		&& data->arg.number == 0)
 		nb_len = 0;
-	if ((data->flags.sign || nb < 0 || data->flags.space) && type != 'u')
+	if ((data->flags.sign || data->arg.number < 0 || data->flags.space)
+		&& type != 'u')
 		sign_len = 1;
 	if ((data->flags.precision == 1 || data->flags.left) && data->flags.zero)
 		data->flags.zero = 0;
 	if (data->flags.precision && data->flags.p_size - nb_len > 0)
 		data->format.zeros = data->flags.p_size - nb_len;
-	padding = data->flags.width - data->format.zeros;
-	padding -= (nb_len + sign_len);
+	padding = data->flags.width - data->format.zeros - nb_len - sign_len;
 	if (padding > 0 && data->flags.zero)
 		data->format.zeros = padding;
 	else if (padding > 0)
 		data->format.spaces = padding;
 }
 
-void	format_xX()
+void	format_xX(t_data *data, va_list args)
 {
-		data->arg.number = va_arg(args, unsigned int);
+	int	hex_len;
+	int	prefix_len;
+	int	padding;
+
+	data->arg.number = va_arg(args, unsigned int);
+	hex_len = size_of_hex_in_chars(data->arg.number);
+	prefix_len = 0;
+	if (data->flags.precision == 1 && data->flags.p_size == 0
+		&& data->arg.number == 0)
+		hex_len = 0;
+	if (data->flags.prefix && data->arg.number > 0)
+		prefix_len = 2;
+	if ((data->flags.precision == 1 || data->flags.left) && data->flags.zero)
+		data->flags.zero = 0;
+	if (data->flags.precision && data->flags.p_size - hex_len > 0)
+		data->format.zeros = data->flags.p_size - hex_len;
+	padding = data->flags.width - data->format.zeros - hex_len - prefix_len;
+	if (padding > 0 && data->flags.zero)
+		data->format.zeros = padding;
+	else if (padding > 0)
+		data->format.spaces = padding;
 }
 
-void	format_s()
+void	format_s(t_data *data, va_list args)
 {
-	
+	int	len;
+	int	padding;
+
+	data->arg.string = va_arg(args, char *);
+	len = ft_strlen(data->arg.string);
+	if (data->flags.precision == 1 && data->flags.p_size == 0)
+		len = 0;
+	if (data->flags.precision && data->flags.p_size - len < 0)
+		len = data->flags.precision;
+	padding = data->flags.width - len;
+	if (padding)
+		data->format.spaces = padding;
 }
 
 void	format_p()

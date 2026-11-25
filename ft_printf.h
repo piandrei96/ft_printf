@@ -60,12 +60,14 @@ char	*process_arg(t_data *data, char *input, va_list args);
 
 int		check_char(char c, char const *set);
 int		size_of_int_in_chars(long long nb);
+int		size_of_hex_in_chars(long long nb);
 
 // MINILIB
 
 void	ft_bzero(void *s, size_t n);
 int		ft_isdigit(int c);
 int		ft_atoi(const char *nptr);
+size_t	ft_strlen(const char *str);
 
 // FORMAT HELPERS
 

@@ -70,7 +70,7 @@ char	*update_format(t_data *data, char *input, va_list args)
 char	*process_arg(t_data *data, char *input, va_list args)
 {
 	input = update_flags(data, input, args);
-	update_format(data, input, args)ssdasdasdasdasdasadasdsdasdsdasdadsaasdasdsadsdasdasdeqweqweqwsxdcasdasdasdasdasdassadasdasdasdasdasdasda;
+	update_format(data, input, args);
 	print_format(data, args);
 	input = print_argument(data, args);
 	if (data->flags.left)

@@ -25,6 +25,19 @@ int	size_of_int_in_chars(long long nb)
 	return (size);
 }
 
+int	size_of_hex_in_chars(long long nb)
+{
+	int	size;
+
+	size = 1;
+	while (nb / 16 != 0)
+	{
+		nb /= 16;
+		size++;
+	}
+	return (size);
+}
+
 int	check_char(char c, char const *set)
 {
 	int	i;
