@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrpetr <andrpetr@marvin.42.fr>           +#+  +:+       +#+        */
+/*   By: andrpetr <andrpetr@marvin.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/13 14:51:21 by andrpetr          #+#    #+#             */
-/*   Updated: 2026/11/24 01:33:49 by andrpetr         ###   ########.fr       */
+/*   Updated: 2026/11/27 21:32:55 by andrpetr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "../../libs/ft_printf.h"
 
 void	ft_bzero(void *s, size_t n)
 {

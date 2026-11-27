@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrpetr <andrpetr@marvin.42.fr>           +#+  +:+       +#+        */
+/*   By: andrpetr <andrpetr@marvin.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/16 14:22:45 by andrpetr          #+#    #+#             */
-/*   Updated: 2026/11/24 01:33:40 by andrpetr         ###   ########.fr       */
+/*   Updated: 2026/11/27 21:32:51 by andrpetr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "../../libs/ft_printf.h"
 
 int	ft_atoi(const char *nptr)
 {

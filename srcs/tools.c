@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrpetr <andrpetr@marvin.42.fr>           +#+  +:+       +#+        */
+/*   By: andrpetr <andrpetr@marvin.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/16 12:46:17 by andrpetr          #+#    #+#             */
-/*   Updated: 2026/11/24 01:31:02 by andrpetr         ###   ########.fr       */
+/*   Updated: 2026/11/27 21:32:06 by andrpetr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../libs/ft_printf.h"
 
 int	size_of_int_in_chars(long long nb)
 {
@@ -25,7 +25,20 @@ int	size_of_int_in_chars(long long nb)
 	return (size);
 }
 
-int	size_of_hex_in_chars(long long nb)
+int	size_of_hex_in_chars(unsigned long long nb)
+{
+	int	size;
+
+	size = 1;
+	while (nb / 16 != 0)
+	{
+		nb /= 16;
+		size++;
+	}
+	return (size);
+}
+
+int	size_of_phex_in_chars(unsigned long long nb)
 {
 	int	size;
 

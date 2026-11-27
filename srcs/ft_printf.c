@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrpetr <andrpetr@marvin.42.fr>           +#+  +:+       +#+        */
+/*   By: andrpetr <andrpetr@marvin.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/16 12:14:15 by andrpetr          #+#    #+#             */
-/*   Updated: 2026/11/24 01:33:23 by andrpetr         ###   ########.fr       */
+/*   Updated: 2026/11/27 23:19:26 by andrpetr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-
+#include "../libs/ft_printf.h"
 
 int	ft_printf(const char *str, ...)
 {
@@ -28,7 +27,7 @@ int	ft_printf(const char *str, ...)
 		if (*input_cast == '%')
 			input_cast = process_arg(&data, ++input_cast, args);
 		else
-			data.total_size += write (1, input_cast++, 1);
+			data.total_size += write(1, input_cast++, 1);
 	}
 	va_end(args);
 	return (data.total_size);

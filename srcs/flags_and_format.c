@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_arg.c                                      :+:      :+:    :+:   */
+/*   flags_and_format.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrpetr <andrpetr@marvin.42.fr>           +#+  +:+       +#+        */
+/*   By: andrpetr <andrpetr@marvin.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/11/16 12:40:23 by andrpetr          #+#    #+#             */
-/*   Updated: 2026/11/24 01:38:50 by andrpetr         ###   ########.fr       */
+/*   Created: 2026/11/26 20:31:08 by andrpetr          #+#    #+#             */
+/*   Updated: 2026/11/27 21:32:17 by andrpetr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../libs/ft_printf.h"
 
 char	*set_flags(t_data *data, char *input)
 {
@@ -31,7 +31,7 @@ char	*set_flags(t_data *data, char *input)
 	return (input);
 }
 
-char	*update_flags(t_data *data, char *input, va_list args)
+char	*update_flags(t_data *data, char *input)
 {
 	ft_bzero(&data->flags, sizeof(t_flags));
 	ft_bzero(&data->format, sizeof(data->format));
@@ -53,27 +53,16 @@ char	*update_flags(t_data *data, char *input, va_list args)
 	return (input);
 }
 
-char	*update_format(t_data *data, char *input, va_list args)
+void	update_format(t_data *data, char *input, va_list args)
 {
 	if (*input == 'd' || *input == 'i' || *input == 'u')
 		format_diu(data, *input, args);
 	else if (*input == 'x' || *input == 'X')
-		
+		format_hex(data, args);
 	else if (*input == 'p')
-
+		format_p(data, args);
 	else if (*input == 's')
-
+		format_s(data, args);
 	else if (*input == 'c')
-
-}
-
-char	*process_arg(t_data *data, char *input, va_list args)
-{
-	input = update_flags(data, input, args);
-	update_format(data, input, args);
-	print_format(data, args);
-	input = print_argument(data, args);
-	if (data->flags.left)
-		print_spaces();
-	return (input);	
+		format_c(data, args);
 }

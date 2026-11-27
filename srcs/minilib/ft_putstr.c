@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrpetr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: andrpetr <andrpetr@marvin.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/13 14:24:13 by andrpetr          #+#    #+#             */
-/*   Updated: 2026/10/19 14:42:20 by andrpetr         ###   ########.fr       */
+/*   Created: 2026/11/27 17:21:12 by andrpetr          #+#    #+#             */
+/*   Updated: 2026/11/27 21:33:05 by andrpetr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "../../libs/ft_printf.h"
 
-size_t	ft_strlen(const char *str)
+int	ft_putstr(char *str)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (str[i])
 		i++;
+	write(1, str, i);
 	return (i);
 }

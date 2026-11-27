@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update_format_helpers.c                            :+:      :+:    :+:   */
+/*   format_helpers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrpetr <andrpetr@marvin.42.fr>           +#+  +:+       +#+        */
+/*   By: andrpetr <andrpetr@marvin.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/17 11:57:25 by andrpetr          #+#    #+#             */
-/*   Updated: 2026/11/24 01:41:32 by andrpetr         ###   ########.fr       */
+/*   Updated: 2026/11/27 22:11:16 by andrpetr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../libs/ft_printf.h"
 
 // nb_len is used for precision calculation since "-+ "
 // aren't taken into account (yes even the - from a negative number)
@@ -45,19 +45,19 @@ void	format_diu(t_data *data, char type, va_list args)
 		data->format.spaces = padding;
 }
 
-void	format_xX(t_data *data, va_list args)
+void	format_hex(t_data *data, va_list args)
 {
 	int	hex_len;
 	int	prefix_len;
 	int	padding;
 
-	data->arg.number = va_arg(args, unsigned int);
-	hex_len = size_of_hex_in_chars(data->arg.number);
+	data->arg.address_or_hex = va_arg(args, unsigned int);
+	hex_len = size_of_hex_in_chars(data->arg.address_or_hex);
 	prefix_len = 0;
 	if (data->flags.precision == 1 && data->flags.p_size == 0
-		&& data->arg.number == 0)
+		&& data->arg.address_or_hex == 0)
 		hex_len = 0;
-	if (data->flags.prefix && data->arg.number > 0)
+	if (data->flags.prefix && data->arg.address_or_hex > 0)
 		prefix_len = 2;
 	if ((data->flags.precision == 1 || data->flags.left) && data->flags.zero)
 		data->flags.zero = 0;
@@ -76,22 +76,39 @@ void	format_s(t_data *data, va_list args)
 	int	padding;
 
 	data->arg.string = va_arg(args, char *);
-	len = ft_strlen(data->arg.string);
-	if (data->flags.precision == 1 && data->flags.p_size == 0)
-		len = 0;
-	if (data->flags.precision && data->flags.p_size - len < 0)
-		len = data->flags.precision;
+	if (data->flags.precision)
+		len = strlen_len(data->arg.string, data->flags.p_size);
+	else
+		len = ft_strlen((data->arg.string));
 	padding = data->flags.width - len;
-	if (padding)
+	if (padding > 0)
 		data->format.spaces = padding;
 }
 
-void	format_p()
+void	format_p(t_data *data, va_list args)
 {
-	
+	int		hex_len;
+	void	*p;
+	int		padding;
+
+	p = va_arg(args, void *);
+	data->arg.address_or_hex = (unsigned long long) p;
+	hex_len = size_of_hex_in_chars(data->arg.address_or_hex);
+	if (data->arg.address_or_hex == 0)
+		hex_len = 5;
+	else
+		hex_len += 2;
+	padding = data->flags.width - hex_len;
+	if (padding > 0)
+		data->format.spaces = padding;
 }
 
-void	format_c()
+void	format_c(t_data *data, va_list args)
 {
-	
+	int	padding;
+
+	data->arg.number = va_arg(args, int);
+	padding = data->flags.width - 1;
+	if (padding > 0)
+		data->format.spaces = padding;
 }
